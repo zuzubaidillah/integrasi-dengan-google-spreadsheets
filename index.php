@@ -1,5 +1,6 @@
 <?php
     include 'config/database.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <div class="container">
             <a class="navbar-brand" href="#">Logo</a>
@@ -41,17 +41,22 @@
                     <div class="mb-3">
                         <label for="txtmapel" class="form-label">Mapel</label>
                         <select class="form-control" id="txtmapel" name="txtmapel" aria-describedby="emailHelp">
-                            <option value="pilih">i</option>
-                            <option value="pilih">pilih</option>
-                            <option value="pilih">pilih</option>
-                            <option value="pilih">pilih</option>
-                            <option value="pilih">pilih</option>
-                            <option value="pilih">pilih</option>
-                            <option value="pilih">pilih</option>
-                            <option value="pilih">pilih</option>
-                            <option value="pilih">pilih</option>
-                            <option value="pilih">pilih</option>
-                            <option value="pilih">pilih</option>
+
+                            <?php
+                            $sql = "SELECT * FROM m_mapel ORDER BY nama ASC";
+							$qr = mysqli_query($conn, $sql);
+							while ($dt_mapel = mysqli_fetch_assoc($qr)) {
+                                $id = $dt_mapel['id'];
+                                $nama = $dt_mapel['nama'];
+                                $jenis = $dt_mapel['jenis'];
+                                $tgl_buat = $dt_mapel['tgl_buat'];
+                                $tgl_update = $dt_mapel['tgl_update'];
+                                $id_buat = $dt_mapel['id_buat'];
+                                $id_update = $dt_mapel['id_update'];
+                                echo '<option value="'.$id.'">'.$nama.'</option>';
+                            }
+                            ?>
+
                         </select>
                     </div>
                     <div class="mb-3">
