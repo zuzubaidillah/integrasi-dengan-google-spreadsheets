@@ -69,6 +69,17 @@
             </div>
         </div>
 
+        <?php
+        // kondisi
+        if (count($_POST) != 0) {
+            $post_mapel = $_POST["txtmapel"];
+            $link = $_POST["txtlink"];
+            if ($post_mapel == '' || $link == '') {
+                echo 'data masih kosong';
+            }
+        }
+        ?>
+
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered table-hover" style="width: 100%">
