@@ -1,5 +1,5 @@
 <?php
-    include 'config/database.php';
+include 'config/database.php';
 
 ?>
 <!DOCTYPE html>
@@ -44,8 +44,8 @@
 
                             <?php
                             $sql = "SELECT * FROM m_mapel ORDER BY nama ASC";
-							$qr = mysqli_query($conn, $sql);
-							while ($dt_mapel = mysqli_fetch_assoc($qr)) {
+                            $qr = mysqli_query($conn, $sql);
+                            while ($dt_mapel = mysqli_fetch_assoc($qr)) {
                                 $id = $dt_mapel['id'];
                                 $nama = $dt_mapel['nama'];
                                 $jenis = $dt_mapel['jenis'];
@@ -53,7 +53,7 @@
                                 $tgl_update = $dt_mapel['tgl_update'];
                                 $id_buat = $dt_mapel['id_buat'];
                                 $id_update = $dt_mapel['id_update'];
-                                echo '<option value="'.$id.'">'.$nama.'</option>';
+                                echo '<option value="' . $id . '">' . $nama . '</option>';
                             }
                             ?>
 
@@ -75,7 +75,7 @@
             $post_mapel = $_POST["txtmapel"];
             $link = $_POST["txtlink"];
             if ($post_mapel == '' || $link == '') {
-                echo 'data masih kosong';
+                $notifikasi = '';
             }
         }
         ?>
@@ -115,13 +115,20 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Gagal',
-            text: 'Data Masih Kosong!'
-        })
-    </script>
+    <?php
+    // isset jika ada variabel $notifikasi
+    if (isset($notifikasi)) {
+    ?>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Data Masih Kosong!'
+            })
+        </script>
+    <?php
+    }
+    ?>
 </body>
 
 </html>
