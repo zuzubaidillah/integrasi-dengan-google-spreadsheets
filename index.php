@@ -43,6 +43,12 @@ include 'config/database.php';
                         <select class="form-control" id="txtmapel" name="txtmapel" aria-describedby="emailHelp">
 
                             <?php
+                            if (isset($_POST['txtmapel'])){
+								$mapel_post = $_POST['txtmapel'];
+							}else{
+								$mapel_post = '';
+							}
+
                             $sql = "SELECT * FROM m_mapel ORDER BY nama ASC";
                             $qr = mysqli_query($conn, $sql);
                             while ($dt_mapel = mysqli_fetch_assoc($qr)) {
@@ -53,7 +59,14 @@ include 'config/database.php';
                                 $tgl_update = $dt_mapel['tgl_update'];
                                 $id_buat = $dt_mapel['id_buat'];
                                 $id_update = $dt_mapel['id_update'];
-                                echo '<option value="' . $id . '">' . $nama . '</option>';
+
+                                if ($id==$mapel_post){
+									$selec = 'selected';
+								}else{
+									$selec = '';
+								}
+
+                                echo '<option '.$selec.' value="' . $id . '">' . $nama . '</option>';
                             }
                             ?>
 
@@ -61,7 +74,15 @@ include 'config/database.php';
                     </div>
                     <div class="mb-3">
                         <label for="txtlink" class="form-label">Link Sheets</label>
-                        <input type="text" class="form-control" id="txtlink" name="txtlink" value="">
+
+                        <?php
+                        if (isset($_POST['txtlink'])){
+                            $link_post = $_POST['txtlink'];
+                        }else{
+                            $link_post = '';
+                        }
+                        ?>
+                        <input type="text" class="form-control" id="txtlink" name="txtlink" value="<?=$link_post;?>">
                     </div>
                     <button type="submit" name="btn_lihat" class="btn btn-success">Lihat Data</button>
                     <button type="submit" name="btn_singkron" class="btn btn-primary">Singkron Sekarang</button>
